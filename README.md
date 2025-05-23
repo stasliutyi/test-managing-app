@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Management Application
 
-## Getting Started
+A React-based task management application with support for different types of tasks: basic, priority, date-based, and work blocks.
 
-First, run the development server:
+## Setup
 
+1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Start the development server:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API Integration Points
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. API Configuration
+- Location: `src/services/api.ts`
+- Replace the mock API URL with your actual endpoint:
+```typescript
+const API_URL = 'https://api.example.com'; // Replace with your actual API URL
+```
 
-## Learn More
+### 2. Mock Data Replacement
+- Location: `src/data/mock-tasks.ts`
+- Replace mock data with actual API responses
+- Current mock data structure:
+```typescript
+export const mockTasks: Task[] = [
+  {
+    id: "1",
+    type: "basic",
+    line: "Sample Task",
+    tag: "work",
+    // ... other fields
+  }
+];
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. API Service Methods
+- Location: `src/services/api.ts`
+- Current mock implementations to replace:
+  - `getTasks()`: Fetch all tasks
+  - `createTask()`: Create new task
+  - `updateTask()`: Update existing task
+  - `deleteTask()`: Delete task
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Redux Store Integration
+- Location: `src/store/taskSlice.ts`
+- Current implementation uses mock data
+- Replace with actual API calls in thunks:
+  - `fetchTasks`
+  - `createTask`
+  - `updateTask`
+  - `deleteTask`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Task Types
 
-## Deploy on Vercel
+1. **Basic Task**
+   - Line (text)
+   - Tag
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Priority Task**
+   - Line
+   - Tag
+   - Priority
+   - Status (Completed/Not Completed/No Status)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Date Task**
+   - Line
+   - Tag
+   - Start Date/Time
+   - End Time
+   - Final Date/Time
+   - Repeat options (never/day/week/month/custom)
+
+4. **Work Block Task**
+   - Line
+   - Tag
+   - Priority
+   - End Date
+
+## UI Components
+
+- `MainContent.tsx`: Main task list and modals
+- `RightSidebar.tsx`: Task editing panel
+- `NewLineModal.tsx`: Basic task creation
+- `NewPriorityLineModal.tsx`: Priority task creation
+- `NewDateLineModal.tsx`: Date task creation
+- `NewWorkBlockLineModal.tsx`: Work block task creation
+
+## State Management
+
+- Redux store for global state
+- Local state for UI components
+- Toast notifications for operation feedback
+
+## Styling
+
+- Tailwind CSS for styling
+- Shadcn UI components
+- Custom components in `src/components/ui`
+
+## Testing
+
+- Add unit tests for components
+- Add integration tests for API calls
+- Add end-to-end tests for user flows
+
+## Future Improvements
+
+1. Add authentication
+2. Implement real-time updates
+3. Add task filtering and sorting
+4. Implement task categories
+5. Add task dependencies
+6. Implement task templates
+7. Add export/import functionality
+8. Implement task sharing
