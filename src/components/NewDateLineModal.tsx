@@ -196,7 +196,7 @@ const NewDateLineModal: React.FC<NewDateLineModalProps> = ({ isOpen, onClose, on
                   className="col-span-1"
                   min="1"
                 />
-                 <Select onValueChange={(value: Task['repeatOn']) => setRepeatOn(value)} value={repeatOn}>
+                 <Select onValueChange={(value) => setRepeatOn(value as Task['repeatOn'])} value={repeatOn}>
                     <SelectTrigger className="col-span-2">
                       <SelectValue placeholder="Time unit" />
                     </SelectTrigger>
